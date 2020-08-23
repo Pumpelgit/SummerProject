@@ -42,7 +42,7 @@ const google = new GoogleStrategy(
   {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google",
+    callbackURL: " http://ironhack-summer-project.herokuapp.com/auth/google",
   },
   (accessToken, refreshToken, profile, next) => {
     User.findOne({ "social.google": profile.id })
