@@ -58,7 +58,7 @@ module.exports.newproject = (req, res, next) => {
 
 module.exports.createproject = (req, res, next) => {
   const projectParams = req.body
-  projectParams.image = req.file ? `/uploads/${req.file.filename}` : undefined
+  projectParams.image = req.file ? req.file.path : undefined
   projectParams.author = req.currentUser._id
   const project = new Project(projectParams)
   project
