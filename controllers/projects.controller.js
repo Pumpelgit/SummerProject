@@ -98,7 +98,7 @@ module.exports.editProject = (req, res, next) => {
 
 module.exports.updateProject = (req, res, next) => {
   const projectParams = req.body
-  projectParams.image = req.file ? `/uploads/${req.file.filename}` : undefined
+  projectParams.image = req.file ? req.file.path : undefined
   projectParams.author = req.currentUser._id
   Project.findByIdAndUpdate(req.params.id, projectParams)
   .then((project)=>{
