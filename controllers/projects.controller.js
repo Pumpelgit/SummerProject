@@ -14,8 +14,6 @@ module.exports.list = (req, res, next) => {
   }
 
   Project.find(searchField)
-    .sort({ createdAt: -1 })
-    .limit(100)
     .populate("author")
     .populate("comments")
     .populate("likes")
