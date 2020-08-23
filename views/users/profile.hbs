@@ -32,7 +32,8 @@
                         <p class="card-subtitle text-right">Created: {{date p.createdAt}}</p>
                     </div>
                 </div>
-                {{#ifEquals p.author._id ../currentUser._id }}                
+                {{#ifEquals p.author._id ../currentUser._id }}    
+                <a href="/projects/{{p._id}}/edit" class="btn btn-secondary">Edit Project</a>            
                 <a href="/projects/{{p._id}}/delete" class="btn btn-danger">
                     Delete Project
                 </a>
