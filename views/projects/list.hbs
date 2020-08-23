@@ -1,0 +1,30 @@
+<section id="projects" class="row justify-content-center">
+  {{#each projects as |p|}}
+  <div class="card w-100 mb-3 mr-2 col-5 p-0">
+    <div class="card-body p-0">
+      <a href="projects/{{p._id}}">
+        <img class="rounded-sm w-100 m-0" src="{{p.image}}" />
+      </a>
+      <h4 class="card-text">
+        {{p.name}}
+      </h4>
+      <div>
+        <span><a class="btn btn-sm btn-outline-secondary" href="/projects/{{p._id}}#comments">
+            <i class="fa fa-comments"></i>
+            {{p.comments.length}}
+          </a>
+        </span>
+
+        <button class="btn btn-sm btn-outline-danger" id="{{p._id}}" onclick="like(event)">
+          <i class="fa fa-heart"></i>
+          <span class="likes-count">{{p.likes}}</span>
+        </button>
+      </div>
+
+      <a href="/user/{{p.author._id}}" class="text-right text-muted d-block muted mb-2">Author:
+        {{p.author.username}}</a>
+      <p class="card-subtitle text-muted text-right">Created: {{date p.createdAt}}</p>
+    </div>
+  </div>
+  {{/each}}
+</section>

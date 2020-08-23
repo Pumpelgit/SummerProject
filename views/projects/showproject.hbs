@@ -1,0 +1,79 @@
+<section class="row justify-content-center col-12 ">
+    <div class="card w-100 mb-3 mr-2 col-8 p-0">
+        <div class="card-body p-0">
+            <a href="https://{{project.url}}">
+                <img class="rounded-sm w-100 m-0" src="{{project.image}}" />
+            </a>
+            <h3 class="card-text ml-2">
+                {{project.name}}
+            </h3>
+            <h5>
+                <img class="rounded-circle" width="50" src="{{project.author.avatar}}" alt="author avatar">
+                <span>{{project.author.username}}</span>
+            </h5>
+            <p>{{project.description}}</p>
+            <div>
+                <span>
+                    <a class="btn btn-sm btn-outline-secondary" href="#comments">
+                        <i class="fa fa-comments"></i>
+                        {{project.comments.length}}
+                    </a>
+                </span>
+                <button class="btn btn-sm btn-outline-danger" id="{{project._id}}" onclick="like(event)">
+                    <i class="fa fa-heart"></i>
+                    <span class="likes-count">{{project.likes}}</span>
+                </button>
+            </div>
+            <div class="text-muted text-right">
+                <a href="/user/{{project.author._id}}" class="d-block muted mb-2">
+                    Author: {{project.author.username}}</a>
+                <p class="card-subtitle">Created: {{date project.createdAt}}</p>
+                {{#ifEquals project.author.id user}}
+                <a href="/projects/{{project._id}}/edit" class="btn btn-secondary">Edit Project</a>
+                <a href="/projects/{{project._id}}/delete" class="btn btn-danger">Delete Project</a>
+                {{/ifEquals}}
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <h3 id="comments">Comments</h3>
+        <form action="/newComment" method="POST">
+
+            <input type="hidden" name="project" value="{{project._id}}" />
+            <textarea id="addcomment" class="form-control mb-2" type="text" name="addcomment" required></textarea>
+            <button class="btn btn-outline-success mb-2" type="submit">Add Comment</button>
+        </form>
+        <div class="border-top">
+            {{#each project.comments as |c|}}
+            <div class="border-bottom pt-2">
+                <h6>
+                    <img src="{{c.user.avatar}}" class="rounded-circle" width="20" />
+                    <a href="users/{{c.user.id}}">
+                        {{c.user.username}}
+                    </a>
+                    <span class="text-muted" style="font-size: 0.8em">{{date c.createdAt}}</span>
+
+                </h6>
+                <p class="pl-4">
+                    {{c.text}}
+                </p>
+                {{#ifEquals ../project.author.id ../user}}
+                <div class="text-right">
+                    <a href="/comments/{{c._id}}/delete" class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+                {{else}}
+                    {{#ifEquals c.user.id ../user}}
+                    <div class="text-right">
+                        <a href="/comments/{{c._id}}/delete" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>
+                    {{/ifEquals}}
+                {{/ifEquals}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
