@@ -17,7 +17,7 @@ Promise.all([
   .then(() => {
     console.log('empty database')
 
-    for (let i = 0; i < 400; i++) {
+    for (let i = 0; i < 40; i++) {
       const user = new User({
         name: faker.name.findName(),
         email: faker.internet.email(),
