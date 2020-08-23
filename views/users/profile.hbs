@@ -33,9 +33,11 @@
                     </div>
                 </div>
                 {{#ifEquals p.author._id ../currentUser._id }}    
-                <a href="/projects/{{p._id}}/edit" class="btn btn-secondary col-6">Edit Project</a>            
-                <a href="/projects/{{p._id}}/delete" class="btn btn-danger col-6">
-                    Delete Project
+                <a href="/projects/{{p._id}}/edit" class="btn btn-secondary">
+                <i class="fa fa-pencil"></i>
+                </a>            
+                <a href="/projects/{{p._id}}/delete" class="btn btn-danger">
+                    <i class="fa fa-trash"></i>
                 </a>
                 {{/ifEquals}}
             </div>
