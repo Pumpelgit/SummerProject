@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-require('./like.model')
-require("./comment.model");
+const Like = require('./like.model')
+const Comment = require("./comment.model");
 
 const projectSchema = new mongoose.Schema(
   {
@@ -44,6 +44,14 @@ projectSchema.virtual("likes", {
   foreignField: "project",
   count: true
 });
+
+projectSchema.post('remove', function (next) {
+  Promise.all([
+    Like.deleteMany({project: this._id}),
+    Comment.deleteMany({project: this._id})
+  ])
+  .then(next)
+})
 
 const Project = mongoose.model("Project", projectSchema);
 
